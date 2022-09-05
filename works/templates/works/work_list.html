@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Work List</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+{% if request.user.is_authenticated %}
+    <p>{{request.user}}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+{% endif%}
+
+<hr>
+<h1> My Work List </h1>
+<a href="{% url 'create' %}">Add Work</a>
+ <br><br>
+
+
+<form method="GET">
+<input type="text" name="search" value="{{search_input}}"/>
+<input type="submit" value="Search"/>
+</form>
+
+
+
+
+<table>
+    <tr>
+        <th></th>
+    </tr>
+    {% for i in Works %}
+    <tr>
+        <td>{{i.title}}</td>
+        <td><a href="{% url 'detail' i.id %}">Detail </a></td>
+         <td><a href="{% url 'update' i.id %}">Change </a></td>
+         <td><a href="{% url 'delete' i.id %}">Delete </a></td>
+    </tr>
+    {% empty %}
+    <h3>No items</h3>
+    {% endfor %}
+</table>
+
+    </body>
+</html>

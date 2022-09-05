@@ -1,0 +1,14 @@
+<a href="{% url 'works' %}">Go back</a>
+<form method="POST">
+{% csrf_token %}
+{% ifequal request.user object.user %}
+    <p> You are deleting <b>{{object}}</b>, Continue ?</p>
+    <input type="submit" value="SUBMIT">
+    </form>
+{% else %}
+
+        <p> You cannot delete this. </p>
+        <a href="{% url 'works' %}">Go back</a>
+
+{% endifequal %}
+
